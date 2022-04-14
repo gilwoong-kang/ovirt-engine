@@ -653,8 +653,10 @@ public enum ActionType {
     AddDeprecatedApiEvent(8000, false, QuotaDependency.NONE),
 
     // KubeVirt
-    AddVmToKubevirt(9000, ActionGroup.CREATE_VM, QuotaDependency.NONE);
+    AddVmToKubevirt(9000, ActionGroup.CREATE_VM, QuotaDependency.NONE),
 
+    // integrity
+    CheckIntegrity(10000,ActionGroup.CHECK_INTEGRITY,QuotaDependency.NONE);
     private int intValue;
     private ActionGroup actionGroup;
     private boolean isActionMonitored;

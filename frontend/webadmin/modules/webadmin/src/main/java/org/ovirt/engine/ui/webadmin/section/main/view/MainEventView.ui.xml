@@ -12,6 +12,7 @@
             <b:ButtonGroup dataToggle="BUTTONS">
                 <b:RadioButton ui:field="basicViewButton" name="view" text="{constants.eventBasicViewLabel}" active="true" />
                 <b:RadioButton ui:field="advancedViewButton" name="view" text="{constants.eventAdvancedViewLabel}" />
+                <b:RadioButton ui:field="integrityCheckButton" name="view" text="{constants.integrityCheckViewLabel}" />
             </b:ButtonGroup>
         </g:FlowPanel>
         <g:FlowPanel ui:field="tablePanel" />

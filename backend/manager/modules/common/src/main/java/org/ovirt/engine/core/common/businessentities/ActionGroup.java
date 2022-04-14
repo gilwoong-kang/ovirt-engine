@@ -162,8 +162,9 @@ public enum ActionGroup {
     DELETE_CPU_PROFILE(1665, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
     UPDATE_CPU_PROFILE(1666, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
     CREATE_CPU_PROFILE(1667, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
-    ASSIGN_CPU_PROFILE(1668, RoleType.ADMIN, true, ApplicationMode.VirtOnly);
+    ASSIGN_CPU_PROFILE(1668, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
 
+    CHECK_INTEGRITY(1800,RoleType.ADMIN,true,ApplicationMode.AllModes);
     private int id;
     private RoleType roleType;
     private boolean allowsViewingChildren;

@@ -959,6 +959,8 @@ public interface UIConstants extends Constants {
 
     String allowToManageEventNotifications();
 
+    String allowToManageIntegrity();
+
     String allowToManageAuditLogs();
 
     String allowToDefineConfigureRolesInTheSystemRoleTreeTooltip();

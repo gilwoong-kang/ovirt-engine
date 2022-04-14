@@ -36,6 +36,8 @@ public interface ApplicationConstants extends CommonApplicationConstants {
 
     String guideLinkLabel();
 
+    String integrityCheckViewLabel();
+
     String searchLabel();
 
     String clearSearch();

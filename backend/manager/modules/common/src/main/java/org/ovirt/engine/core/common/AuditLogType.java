@@ -1612,7 +1612,15 @@ public enum AuditLogType {
     USER_ADD_VM_TO_KUBEVIRT_REQUEST_FAILED(13501),
 
     // A generic error message to log validation failure events
-    GENERIC_ERROR_MESSAGE(14001, AuditLogSeverity.ERROR);
+    GENERIC_ERROR_MESSAGE(14001, AuditLogSeverity.ERROR),
+
+    // integrity
+    INTEGRITY_CHECK_PASS(15000),
+    INTEGRITY_CHECK_FAIL(15001,AuditLogSeverity.ERROR),
+    INTEGRITY_CHECK_ENGINE_INIT_PASS(15002),
+    INTEGRITY_CHECK_ENGINE_INIT_FAIL(15003,AuditLogSeverity.ERROR),
+    INTEGRITY_CHECK_ADMIN_PASS(15004),
+    INTEGRITY_CHECK_ADMIN_FAIL(15005,AuditLogSeverity.ERROR);
 
     private int intValue;
     // indicates time interval in seconds on which identical events from same instance are suppressed.

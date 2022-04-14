@@ -298,6 +298,7 @@ public class RoleTreeView {
                         roleNode(ActionGroup.ADD_USERS_AND_GROUPS_FROM_DIRECTORY, getConstants().allowToAddUsersAndGroupsFromDirectoryOnObjectsInTheSystemRoleTreeTooltip()),
                         roleNode(ActionGroup.MANIPULATE_ROLES, getConstants().allowToDefineConfigureRolesInTheSystemRoleTreeTooltip()),
                         roleNode(ActionGroup.LOGIN, getConstants().allowToLoginToTheSystemRoleTreeTooltip()),
+                        roleNode(ActionGroup.CHECK_INTEGRITY, getConstants().allowToManageIntegrity()),
                         roleNode(ActionGroup.TAG_MANAGEMENT, getConstants().allowToManageTags()),
                         roleNode(ActionGroup.BOOKMARK_MANAGEMENT, getConstants().allowToManageBookmarks()),
                         roleNode(ActionGroup.EVENT_NOTIFICATION_MANAGEMENT, getConstants().allowToManageEventNotifications()),
