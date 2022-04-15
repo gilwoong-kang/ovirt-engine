@@ -22,7 +22,6 @@ public class IntegrityController extends AuditLogableBase {
     private AuditLogDirector auditLogDirector;
 
     private final int PERIOD_TIME = 1000*60*60;
-
     private Aide aide;
   //  private SendMail sendMail;
     private final int abnormalValue = 10;
@@ -50,7 +49,7 @@ public class IntegrityController extends AuditLogableBase {
                 while(true){
                     logger.info("Integrity check...");
                     String[] report = aide.aideRunWithLog().split("\n");
-                    if(!parse(report).isEmpty()){
+                    if(isIntegrityFail(report)){
                         logger.error("integrity problem. Detail");
                         StringBuilder log = new StringBuilder();
                         for(String s : report){
@@ -78,7 +77,7 @@ public class IntegrityController extends AuditLogableBase {
     public boolean runOnce(){
         logger.info("run once.");
         String[] report = aide.aideRunWithLog().split("\n");
-        if(!parse(report).isEmpty()){
+        if(isIntegrityFail(report)){
             logger.error("integrity problem. Detail");
             StringBuilder log = new StringBuilder();
             for(String s : report){
@@ -98,7 +97,7 @@ public class IntegrityController extends AuditLogableBase {
     public String runAdminReq(){
         logger.info("run admin req...");
         String[] report = aide.aideRunWithLog().split("\n");
-        if(!parse(report).isEmpty()){
+        if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){
                 log.append(s);
@@ -110,15 +109,27 @@ public class IntegrityController extends AuditLogableBase {
         }
     }
 
-    private List<String> parse(String[] content){
+    private boolean isIntegrityFail(String[] content){
         List<String> result = new ArrayList<>();
-        for(String value : content){
-            String[] line = value.split(":");
-            if(line[0].equals("\tWARNING") || line[0].equals("\tDELETION") || line[0].equals("\tADDITION")){
-                result.add(value);
+        for(String value : content) {
+//            String[] line = value.split(":");
+//            if(line[0].equals("\tWARNING") || line[0].equals("\tDELETION") || line[0].equals("\tADDITION")){
+//                result.add(value);
+//            }
+
+            // aide parse
+            // aide integrity fail
+            if (value.trim().equals(aide.getAIDE_fAIL())) {
+                return false;
+                // aide integrity pass
+            } else if (value.trim().equals(aide.getAIDE_PASS())) {
+                return true;
+                // aide some error
+            } else {
+                return false;
             }
         }
-        return result;
+        return false;
     }
 
     @Override

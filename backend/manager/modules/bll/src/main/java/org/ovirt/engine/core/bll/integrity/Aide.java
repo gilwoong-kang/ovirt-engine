@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 public class Aide {
     private AideCommand aideCommand;
     Logger logger = LoggerFactory.getLogger(Aide.class);
+    private final String AIDE_PASS= "AIDE found NO differences between database and filesystem. Looks okay!!";
+    private final String AIDE_fAIL= "AIDE found differences between database and filesystem!!";
 
     public Aide(){
         aideCommand = new AideCommand();
@@ -46,6 +48,14 @@ public class Aide {
     }
     public void configReload() throws IOException {
         aideCommand.reloadFcheckConfig();
+    }
+
+    public String getAIDE_PASS() {
+        return AIDE_PASS;
+    }
+
+    public String getAIDE_fAIL() {
+        return AIDE_fAIL;
     }
 }
 
