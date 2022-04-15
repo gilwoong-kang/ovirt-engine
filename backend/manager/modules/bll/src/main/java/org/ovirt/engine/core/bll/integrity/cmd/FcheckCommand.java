@@ -34,7 +34,7 @@ public class FcheckCommand {
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
 //        integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.run")
-        integrityProperties.getProperty("aide.commnad")
+        integrityProperties.getProperty("aide.command")
         };
     }
 
