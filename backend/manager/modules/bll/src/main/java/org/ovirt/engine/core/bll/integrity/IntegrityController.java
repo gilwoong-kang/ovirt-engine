@@ -82,15 +82,15 @@ public class IntegrityController extends AuditLogableBase {
             StringBuilder log = new StringBuilder();
             for(String s : report){
 	        log.append(s);
-	    }
+	        }
             logger.error(log.toString());
             addCustomValue("errorFile",log.toString());
             auditLogDirector.log(this,AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_FAIL);
             return false;
         }else{
-	    logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
-	    auditLogDirector.log(this, AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_PASS);
-	    return true;
+            logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
+            auditLogDirector.log(this, AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_PASS);
+            return true;
 	    }
     }
 
@@ -110,7 +110,6 @@ public class IntegrityController extends AuditLogableBase {
     }
 
     private boolean isIntegrityFail(String[] content){
-        List<String> result = new ArrayList<>();
         for(String value : content) {
 //            String[] line = value.split(":");
 //            if(line[0].equals("\tWARNING") || line[0].equals("\tDELETION") || line[0].equals("\tADDITION")){
@@ -120,13 +119,13 @@ public class IntegrityController extends AuditLogableBase {
             // aide parse
             // aide integrity fail
             if (value.trim().equals(aide.getAIDE_fAIL())) {
-                return false;
+                return true;
                 // aide integrity pass
             } else if (value.trim().equals(aide.getAIDE_PASS())) {
-                return true;
+                return false;
                 // aide some error
             } else {
-                return false;
+                return true;
             }
         }
         return false;
