@@ -3,30 +3,30 @@ package org.ovirt.engine.core.bll.integrity;
 
 import java.io.IOException;
 import org.ovirt.engine.core.bll.integrity.cmd.Cmd;
-import org.ovirt.engine.core.bll.integrity.cmd.FcheckCommand;
+import org.ovirt.engine.core.bll.integrity.cmd.AideCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Fcheck {
-    private FcheckCommand fcheckCommand;
-    Logger logger = LoggerFactory.getLogger(Fcheck.class);
+public class Aide {
+    private AideCommand aideCommand;
+    Logger logger = LoggerFactory.getLogger(Aide.class);
 
-    public Fcheck(){
-        fcheckCommand = new FcheckCommand();
+    public Aide(){
+        aideCommand = new AideCommand();
     }
 
-    public boolean fcheckUpdate(){
+    public boolean aideUpdate(){
         try{
-            logger.info(Cmd.execute(fcheckCommand.getFcheckUpdateCommand()));
+            logger.info(Cmd.execute(aideCommand.getAideUpdateCommand()));
             return true;
         }catch(Exception e){
             e.printStackTrace();
             return false;
         }
     }
-    public String fcheckRun(){
+    public String aideRun(){
         try {
-            String result = Cmd.execute(fcheckCommand.getFcheckRunCommand());
+            String result = Cmd.execute(aideCommand.getAideRunCommand());
             if(!result.equals("")){logger.error(result);}
             return result;
         } catch (Exception e) {
@@ -34,9 +34,9 @@ public class Fcheck {
             return null;
         }
     }
-    public String fcheckRunWithLog(){
+    public String aideRunWithLog(){
         try {
-            String result = Cmd.execute(fcheckCommand.getFcheckRunCommandWithoutGrep());
+            String result = Cmd.execute(aideCommand.getAideRunCommandWithoutGrep());
 //            logger.error(result);
             return result;
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class Fcheck {
         }
     }
     public void configReload() throws IOException {
-        fcheckCommand.reloadFcheckConfig();
+        aideCommand.reloadFcheckConfig();
     }
 }
 

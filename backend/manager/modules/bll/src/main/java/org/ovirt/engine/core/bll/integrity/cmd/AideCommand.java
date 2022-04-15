@@ -4,33 +4,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class FcheckCommand {
+public class AideCommand {
     private Properties integrityProperties;
 //    private final static String CONFIG_PATH = "src/main/resources/commandConfig.properties";
     private InputStream CONFIG_PATH;
-    public FcheckCommand(){
+    public AideCommand(){
         try{
-	    CONFIG_PATH=FcheckCommand.class.getClassLoader().getResourceAsStream("commandConfig.properties");
+	    CONFIG_PATH= AideCommand.class.getClassLoader().getResourceAsStream("commandConfig.properties");
             integrityProperties = new Properties();
             integrityProperties.load(CONFIG_PATH);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    public String[] getFcheckUpdateCommand(){
+    public String[] getAideUpdateCommand(){
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
         integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.update")
         };
     }
-    public String[] getFcheckRunCommand(){
+    public String[] getAideRunCommand(){
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
         integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.run")+
         integrityProperties.getProperty("grep")+integrityProperties.getProperty("grep.total")};
     }
 
-    public String[] getFcheckRunCommandWithoutGrep(){
+    public String[] getAideRunCommandWithoutGrep(){
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
 //        integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.run")
@@ -38,7 +38,7 @@ public class FcheckCommand {
         };
     }
 
-    public void setFcheckPath(String newPath){
+    public void setAidePath(String newPath){
         integrityProperties.setProperty("fcheck.path", newPath);
     }
     public void reloadFcheckConfig() throws IOException {

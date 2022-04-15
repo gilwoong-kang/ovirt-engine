@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -24,21 +23,21 @@ public class IntegrityController extends AuditLogableBase {
 
     private final int PERIOD_TIME = 1000*60*60;
 
-    private Fcheck fcheck;
+    private Aide aide;
   //  private SendMail sendMail;
     private final int abnormalValue = 10;
     Logger logger = LoggerFactory.getLogger(IntegrityController.class);
 //    private PropertiesConfig propertiesConfig;
     public IntegrityController() {
 //        PropertyConfigurator.configure(prop);
-        fcheck = new Fcheck();
+        aide = new Aide();
   //      sendMail = new SendMail();
 //        propertiesConfig = new PropertiesConfig();
     }
 
     public void dataUpdate(){
-        fcheck.fcheckUpdate();
-        logger.info("fcheck update. ");
+        aide.aideUpdate();
+        logger.info("aide update. ");
     }
 
     public void run(Backend backend){
@@ -50,7 +49,7 @@ public class IntegrityController extends AuditLogableBase {
                 logger.info("perform periodic verification.");
                 while(true){
                     logger.info("Integrity check...");
-                    String[] report = fcheck.fcheckRunWithLog().split("\n");
+                    String[] report = aide.aideRunWithLog().split("\n");
                     if(!parse(report).isEmpty()){
                         logger.error("integrity problem. Detail");
                         StringBuilder log = new StringBuilder();
@@ -78,7 +77,7 @@ public class IntegrityController extends AuditLogableBase {
     }
     public boolean runOnce(){
         logger.info("run once.");
-        String[] report = fcheck.fcheckRunWithLog().split("\n");
+        String[] report = aide.aideRunWithLog().split("\n");
         if(!parse(report).isEmpty()){
             logger.error("integrity problem. Detail");
             StringBuilder log = new StringBuilder();
@@ -98,7 +97,7 @@ public class IntegrityController extends AuditLogableBase {
 
     public String runAdminReq(){
         logger.info("run admin req...");
-        String[] report = fcheck.fcheckRunWithLog().split("\n");
+        String[] report = aide.aideRunWithLog().split("\n");
         if(!parse(report).isEmpty()){
             StringBuilder log = new StringBuilder();
             for(String s : report){
