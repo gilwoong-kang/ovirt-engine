@@ -53,7 +53,8 @@ public class IntegrityController extends AuditLogableBase {
                         logger.error("integrity problem. Detail");
                         StringBuilder log = new StringBuilder();
                         for(String s : report){
-                            log.append(s+"\n");
+                            log.append(s);
+                            log.append("\n");
                         }
                         logger.error(log.toString());
                         addCustomValue("errorFile",log.toString());
@@ -82,6 +83,7 @@ public class IntegrityController extends AuditLogableBase {
             StringBuilder log = new StringBuilder();
             for(String s : report){
 	        log.append(s);
+	        log.append("\n");
 	        }
             logger.error(log.toString());
             addCustomValue("errorFile",log.toString());
@@ -101,6 +103,7 @@ public class IntegrityController extends AuditLogableBase {
             StringBuilder log = new StringBuilder();
             for(String s : report){
                 log.append(s);
+                log.append("\n");
             }
             return log.toString();
         }else{
