@@ -124,11 +124,6 @@ public class IntegrityController extends AuditLogableBase {
             if (value.trim().equals(aide.getAIDE_fAIL())) {
                 return true;
                 // aide integrity pass
-            } else if (value.trim().equals(aide.getAIDE_PASS())) {
-                return false;
-                // aide some error
-            } else {
-                return true;
             }
         }
         return false;
