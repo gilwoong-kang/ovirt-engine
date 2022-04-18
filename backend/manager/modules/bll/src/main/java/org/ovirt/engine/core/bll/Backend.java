@@ -42,7 +42,7 @@ import org.ovirt.engine.core.bll.quota.QuotaManager;
 import org.ovirt.engine.core.bll.storage.backup.DbEntityCleanupManager;
 import org.ovirt.engine.core.bll.storage.domain.IsoDomainListSynchronizer;
 import org.ovirt.engine.core.bll.utils.ThreadPoolMonitoringService;
-import org.ovirt.engine.core.bll.integrity.IntegrityController;
+import org.ovirt.engine.core.bll.integrity.EngineIntegrityController;
 import org.ovirt.engine.core.common.EngineWorkingMode;
 import org.ovirt.engine.core.common.TimeZoneType;
 import org.ovirt.engine.core.common.action.ActionParametersBase;
@@ -162,7 +162,7 @@ public class Backend implements BackendInternal, BackendCommandObjectsHandler {
     private DBConfigUtils dbConfigUtils;
 
     @Inject
-    private IntegrityController integrityController;
+    private EngineIntegrityController engineIntegrityController;
 
     private void initHandlers() {
         BaseConditionFieldAutoCompleter.tagsHandler = tagsDirector;
@@ -309,12 +309,13 @@ public class Backend implements BackendInternal, BackendCommandObjectsHandler {
 
         // integrity check
         log.info("Integrity start.");
-        if(!integrityController.runOnce()){
+        if(!engineIntegrityController.runOnce()){
             log.error("Initialize integrity check Error. System shutdown");
             System.exit(0);
-        }else{
-            integrityController.run(this);
         }
+//        else{
+//            engineIntegrityController.run(this);
+//        }
 
     }
 

@@ -1,7 +1,7 @@
 package org.ovirt.engine.core.bll;
 
 import org.ovirt.engine.core.bll.context.CommandContext;
-import org.ovirt.engine.core.bll.integrity.IntegrityController;
+import org.ovirt.engine.core.bll.integrity.EngineIntegrityController;
 import org.ovirt.engine.core.bll.utils.PermissionSubject;
 import org.ovirt.engine.core.common.VdcObjectType;
 import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
@@ -14,7 +14,7 @@ import java.util.List;
 public class AbstractIntegrityCommand<T extends CheckIntegrityParameter> extends CommandBase<T> {
 
     @Inject
-    private IntegrityController integrityController;
+    private EngineIntegrityController engineIntegrityController;
 
     public AbstractIntegrityCommand(T parameters, CommandContext commandContext){
         super(parameters,commandContext);

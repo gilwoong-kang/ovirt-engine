@@ -1,7 +1,7 @@
 package org.ovirt.engine.core.bll;
 
 import org.ovirt.engine.core.bll.context.CommandContext;
-import org.ovirt.engine.core.bll.integrity.IntegrityController;
+import org.ovirt.engine.core.bll.integrity.EngineIntegrityController;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
 
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends AbstractIntegrityCommand<CheckIntegrityParameter> {
 
     @Inject
-    private IntegrityController integrityController;
+    private EngineIntegrityController engineIntegrityController;
 
     public CheckIntegrityCommand(CheckIntegrityParameter parameters, CommandContext cmdContext){
         super(parameters,cmdContext);
@@ -20,7 +20,7 @@ public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends Ab
 
     @Override
     protected void executeCommand() {
-        String result = integrityController.runAdminReq();
+        String result = engineIntegrityController.runAdminReq();
         if(result.isBlank()){
             setSucceeded(true);
         }else{

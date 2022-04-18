@@ -10,13 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class IntegrityController extends AuditLogableBase {
+public class EngineIntegrityController extends AuditLogableBase {
 
     @Inject
     private AuditLogDirector auditLogDirector;
@@ -25,9 +23,9 @@ public class IntegrityController extends AuditLogableBase {
     private Aide aide;
   //  private SendMail sendMail;
     private final int abnormalValue = 10;
-    Logger logger = LoggerFactory.getLogger(IntegrityController.class);
+    Logger logger = LoggerFactory.getLogger(EngineIntegrityController.class);
 //    private PropertiesConfig propertiesConfig;
-    public IntegrityController() {
+    public EngineIntegrityController() {
 //        PropertyConfigurator.configure(prop);
         aide = new Aide();
   //      sendMail = new SendMail();
@@ -41,7 +39,7 @@ public class IntegrityController extends AuditLogableBase {
 
     public void run(Backend backend){
         final ExecutorService executorService = Executors.newFixedThreadPool(2);
-        IntegrityController integrityController = this;
+        EngineIntegrityController engineIntegrityController = this;
         Future<?> future = executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -58,12 +56,12 @@ public class IntegrityController extends AuditLogableBase {
                         }
                         logger.error(log.toString());
                         addCustomValue("errorFile",log.toString());
-                        auditLogDirector.log(integrityController,AuditLogType.INTEGRITY_CHECK_FAIL);
+                        auditLogDirector.log(engineIntegrityController,AuditLogType.INTEGRITY_CHECK_FAIL);
                         System.exit(0);
                         break;
                     }else{
                         logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
-                        auditLogDirector.log(integrityController, AuditLogType.INTEGRITY_CHECK_PASS);
+                        auditLogDirector.log(engineIntegrityController, AuditLogType.INTEGRITY_CHECK_PASS);
                         try{
                             Thread.sleep(PERIOD_TIME);
                         }catch(InterruptedException e){
