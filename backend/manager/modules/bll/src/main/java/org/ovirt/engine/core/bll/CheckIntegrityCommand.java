@@ -6,6 +6,7 @@ import org.ovirt.engine.core.bll.context.CommandContext;
 import org.ovirt.engine.core.bll.integrity.EngineIntegrityController;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
+import org.ovirt.engine.core.vdsbroker.jsonrpc.JsonRpcVdsServer;
 
 
 @NonTransactiveCommandAttribute(forceCompensation = true)

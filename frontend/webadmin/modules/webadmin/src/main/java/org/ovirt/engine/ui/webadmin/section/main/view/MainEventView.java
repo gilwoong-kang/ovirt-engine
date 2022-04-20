@@ -69,7 +69,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
 
     @UiHandler("integrityCheckButton")
     void onIntegrityCheckButton(ClickEvent event){
-        Frontend.getInstance().runAction(ActionType.CheckIntegrity,new CheckIntegrityParameter());
+        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
     }
 
     void handleViewChange(boolean advancedViewEnabled) {
