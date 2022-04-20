@@ -44,6 +44,6 @@ public class AideCommand {
 
     public void reloadFcheckConfig() throws IOException {
         integrityProperties = new Properties();
-	    integrityProperties.load(CONFIG_PATH);
+        integrityProperties.load(CONFIG_PATH);
     }
 }

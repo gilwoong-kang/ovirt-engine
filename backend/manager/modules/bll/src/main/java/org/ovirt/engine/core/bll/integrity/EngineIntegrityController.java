@@ -1,9 +1,9 @@
 package org.ovirt.engine.core.bll.integrity;
 
-import javax.inject.Inject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javax.inject.Inject;
 
 import org.ovirt.engine.core.bll.Backend;
 import org.ovirt.engine.core.common.AuditLogType;
@@ -80,8 +80,8 @@ public class EngineIntegrityController extends AuditLogableBase {
             logger.error("integrity problem. Detail");
             StringBuilder log = new StringBuilder();
             for(String s : report){
-	            log.append(s);
-	            log.append("\n");
+                log.append(s);
+                log.append("\n");
             }
             logger.error(log.toString());
             addCustomValue("errorFile", log.toString());
