@@ -3,9 +3,8 @@ package org.ovirt.engine.core.bll.integrity;
 
 import java.io.IOException;
 
-import org.ovirt.engine.core.bll.integrity.cmd.Cmd;
 import org.ovirt.engine.core.bll.integrity.cmd.AideCommand;
-
+import org.ovirt.engine.core.bll.integrity.cmd.Cmd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
