@@ -656,7 +656,7 @@ public enum ActionType {
     AddVmToKubevirt(9000, ActionGroup.CREATE_VM, QuotaDependency.NONE),
 
     // integrity
-    CheckIntegrity(10000,ActionGroup.CHECK_INTEGRITY,QuotaDependency.NONE);
+    CheckIntegrity(10000, ActionGroup.CHECK_INTEGRITY, QuotaDependency.NONE);
     private int intValue;
     private ActionGroup actionGroup;
     private boolean isActionMonitored;

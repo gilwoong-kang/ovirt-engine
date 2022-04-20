@@ -164,7 +164,7 @@ public enum ActionGroup {
     CREATE_CPU_PROFILE(1667, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
     ASSIGN_CPU_PROFILE(1668, RoleType.ADMIN, true, ApplicationMode.VirtOnly),
 
-    CHECK_INTEGRITY(1800,RoleType.ADMIN,true,ApplicationMode.AllModes);
+    CHECK_INTEGRITY(1800, RoleType.ADMIN, true, ApplicationMode.AllModes);
     private int id;
     private RoleType roleType;
     private boolean allowsViewingChildren;

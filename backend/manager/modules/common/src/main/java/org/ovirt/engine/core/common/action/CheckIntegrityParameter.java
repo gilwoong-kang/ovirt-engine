@@ -1,7 +1,9 @@
 package org.ovirt.engine.core.common.action;
-import org.ovirt.engine.core.compat.Guid;
 
 import javax.validation.constraints.NotNull;
+
+import org.ovirt.engine.core.compat.Guid;
+
 
 public class CheckIntegrityParameter extends ActionParametersBase{
 
