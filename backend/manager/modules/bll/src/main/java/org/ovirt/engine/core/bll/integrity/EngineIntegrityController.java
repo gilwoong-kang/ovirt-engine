@@ -1,7 +1,10 @@
 package org.ovirt.engine.core.bll.integrity;
 
+import javax.inject.Inject;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-//import org.ovirt.engine.core.bll.integrity.mail.SendMail;
 import org.ovirt.engine.core.bll.Backend;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogDirector;
@@ -9,10 +12,6 @@ import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogableBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class EngineIntegrityController extends AuditLogableBase {
 
@@ -55,8 +54,8 @@ public class EngineIntegrityController extends AuditLogableBase {
                             log.append("\n");
                         }
                         logger.error(log.toString());
-                        addCustomValue("errorFile",log.toString());
-                        auditLogDirector.log(engineIntegrityController,AuditLogType.INTEGRITY_CHECK_FAIL);
+                        addCustomValue("errorFile", log.toString());
+                        auditLogDirector.log(engineIntegrityController, AuditLogType.INTEGRITY_CHECK_FAIL);
                         System.exit(0);
                         break;
                     }else{
@@ -73,6 +72,7 @@ public class EngineIntegrityController extends AuditLogableBase {
             }
         });
     }
+
     public boolean runOnce(){
         logger.info("run once.");
         String[] report = aide.aideRunWithLog().split("\n");
@@ -80,18 +80,18 @@ public class EngineIntegrityController extends AuditLogableBase {
             logger.error("integrity problem. Detail");
             StringBuilder log = new StringBuilder();
             for(String s : report){
-	        log.append(s);
-	        log.append("\n");
-	        }
+	            log.append(s);
+	            log.append("\n");
+            }
             logger.error(log.toString());
-            addCustomValue("errorFile",log.toString());
-            auditLogDirector.log(this,AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_FAIL);
+            addCustomValue("errorFile", log.toString());
+            auditLogDirector.log(this, AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_FAIL);
             return false;
         }else{
             logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
             auditLogDirector.log(this, AuditLogType.INTEGRITY_CHECK_ENGINE_INIT_PASS);
             return true;
-	    }
+        }
     }
 
     public String runAdminReq(){
@@ -119,7 +119,7 @@ public class EngineIntegrityController extends AuditLogableBase {
 
             // aide parse
             // aide integrity fail
-            if (value.trim().equals(aide.getAIDE_fAIL())) {
+            if (value.trim().equals(aide.getAIDEfAIL())) {
                 return true;
                 // aide integrity pass
             }

@@ -2,10 +2,13 @@ package org.ovirt.engine.core.bll.integrity;
 
 
 import java.io.IOException;
-import org.ovirt.engine.core.bll.integrity.cmd.Cmd;
-import org.ovirt.engine.core.bll.integrity.cmd.AideCommand;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.ovirt.engine.core.bll.integrity.cmd.Cmd;
+import org.ovirt.engine.core.bll.integrity.cmd.AideCommand;
+
 
 public class Aide {
     private AideCommand aideCommand;
@@ -26,10 +29,13 @@ public class Aide {
             return false;
         }
     }
+
     public String aideRun(){
         try {
             String result = Cmd.execute(aideCommand.getAideRunCommand());
-            if(!result.equals("")){logger.error(result);}
+            if(!result.equals("")){
+                logger.error(result);
+            }
             return result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,11 +56,11 @@ public class Aide {
         aideCommand.reloadFcheckConfig();
     }
 
-    public String getAIDE_PASS() {
+    public String getAIDEPASS() {
         return AIDE_PASS;
     }
 
-    public String getAIDE_fAIL() {
+    public String getAIDEfAIL() {
         return AIDE_fAIL;
     }
 }

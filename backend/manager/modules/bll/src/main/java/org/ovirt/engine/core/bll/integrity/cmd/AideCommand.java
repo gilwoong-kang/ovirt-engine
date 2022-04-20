@@ -10,7 +10,7 @@ public class AideCommand {
     private InputStream CONFIG_PATH;
     public AideCommand(){
         try{
-	    CONFIG_PATH= AideCommand.class.getClassLoader().getResourceAsStream("commandConfig.properties");
+            CONFIG_PATH= AideCommand.class.getClassLoader().getResourceAsStream("commandConfig.properties");
             integrityProperties = new Properties();
             integrityProperties.load(CONFIG_PATH);
         }catch(IOException e){
@@ -41,8 +41,9 @@ public class AideCommand {
     public void setAidePath(String newPath){
         integrityProperties.setProperty("fcheck.path", newPath);
     }
+
     public void reloadFcheckConfig() throws IOException {
-	integrityProperties = new Properties();
-	integrityProperties.load(CONFIG_PATH);
+        integrityProperties = new Properties();
+	    integrityProperties.load(CONFIG_PATH);
     }
 }

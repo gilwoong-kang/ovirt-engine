@@ -1,11 +1,12 @@
 package org.ovirt.engine.core.bll;
 
+import javax.inject.Inject;
+
 import org.ovirt.engine.core.bll.context.CommandContext;
 import org.ovirt.engine.core.bll.integrity.EngineIntegrityController;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
 
-import javax.inject.Inject;
 
 @NonTransactiveCommandAttribute(forceCompensation = true)
 public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends AbstractIntegrityCommand<CheckIntegrityParameter> {
@@ -14,7 +15,7 @@ public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends Ab
     private EngineIntegrityController engineIntegrityController;
 
     public CheckIntegrityCommand(CheckIntegrityParameter parameters, CommandContext cmdContext){
-        super(parameters,cmdContext);
+        super(parameters, cmdContext);
         cmdContext.getExecutionContext().setMonitored(false);
     }
 
@@ -24,7 +25,7 @@ public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends Ab
         if(result.isBlank()){
             setSucceeded(true);
         }else{
-            addCustomValue("errorFile",result);
+            addCustomValue("errorFile", result);
             setSucceeded(false);
         }
     }

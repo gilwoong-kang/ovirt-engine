@@ -41,7 +41,9 @@ public class Cmd {
             } else {
                 // shell 실행이 비정상 종료되었을 경우
                 logger.debug("shell exit error value is Not 0 : " + process.exitValue());
-                if(!errorOutput.toString().equals("") && !successOutput.toString().equals("")){logger.info(errorOutput.toString()+successOutput.toString());}
+                if(!errorOutput.toString().equals("") && !successOutput.toString().equals("")){
+                    logger.info(errorOutput.toString()+successOutput.toString());
+                }
                 result = successOutput.toString() + errorOutput.toString();
             }
         } catch (IOException e) {
@@ -54,8 +56,12 @@ public class Cmd {
             try {
                 process.destroy();
                 logger.debug("process destroy");
-                if (successBufferReader != null){successBufferReader.close();}
-                if (errorBufferReader != null){errorBufferReader.close();}
+                if (successBufferReader != null){
+                    successBufferReader.close();
+                }
+                if (errorBufferReader != null){
+                    errorBufferReader.close();
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
