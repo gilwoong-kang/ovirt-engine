@@ -49,6 +49,8 @@ import org.ovirt.vdsm.jsonrpc.client.BrokerCommandCallback;
 public interface IVdsServer {
     void close();
 
+    HostCliReturn runCmd(String[] cmd);
+
     List<Certificate> getPeerCertificates();
 
     CloseableHttpClient getHttpClient();

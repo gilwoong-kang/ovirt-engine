@@ -51,44 +51,7 @@ import org.ovirt.engine.core.vdsbroker.irsbroker.StoragePoolInfo;
 import org.ovirt.engine.core.vdsbroker.irsbroker.UUIDListReturn;
 import org.ovirt.engine.core.vdsbroker.irsbroker.VmBackupInfo;
 import org.ovirt.engine.core.vdsbroker.irsbroker.VmCheckpointIds;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.BooleanReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.DeviceInfoReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.DevicesVisibilityMapReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.DomainXmlListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.FenceStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.HostDevListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.HostJobsReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.IQNListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.IVdsServer;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.ImageSizeReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.ImageTicketInformationReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.LUNListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.LldpReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.MeasureReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.MigrateStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.NbdServerURLReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.OneStorageDomainInfoReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.OneStorageDomainStatsReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.OneVGReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.OneVmReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.OvfReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.PrepareImageReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.QemuImageInfoReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.ServerConnectionStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.SpmStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.StatusOnlyReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.StorageDomainListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.TaskInfoListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.TaskStatusListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.TaskStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VDSInfoReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VMInfoListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VMListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VMNamesListReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VdsProperties;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VmExternalDataReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VmInfoReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.VolumeInfoReturn;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.*;
 import org.ovirt.vdsm.jsonrpc.client.BrokerCommandCallback;
 import org.ovirt.vdsm.jsonrpc.client.ClientConnectionException;
 import org.ovirt.vdsm.jsonrpc.client.JsonRpcClient;
@@ -215,6 +178,13 @@ public class JsonRpcVdsServer implements IVdsServer {
                         .build();
         Map<String, Object> response = new FutureMap(this.client, request);
         return new StatusOnlyReturn(response);
+    }
+
+    @Override
+    public HostCliReturn runCmd(String[] cmd){
+        JsonRpcRequest request = new RequestBuilder("Host.runCmd").withOptionalParameter("cmd", cmd).build();
+        Map<String, Object> response = new FutureMap(this.client, request);
+        return new HostCliReturn(response);
     }
 
     @Override

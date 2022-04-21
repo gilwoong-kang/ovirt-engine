@@ -10,6 +10,7 @@ import org.ovirt.engine.core.bll.Backend;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogDirector;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogableBase;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.IVdsServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +19,14 @@ public class EngineIntegrityController extends AuditLogableBase {
 
     @Inject
     private AuditLogDirector auditLogDirector;
+    @Inject
+    private IVdsServer iVdsServer;
 
     private final int PERIOD_TIME = 1000*60*60;
     private Aide aide;
-  //  private SendMail sendMail;
     private final int abnormalValue = 10;
     Logger logger = LoggerFactory.getLogger(EngineIntegrityController.class);
-//    private PropertiesConfig propertiesConfig;
+
     public EngineIntegrityController() {
 //        PropertyConfigurator.configure(prop);
         aide = new Aide();
@@ -104,6 +106,8 @@ public class EngineIntegrityController extends AuditLogableBase {
                 log.append(s);
                 log.append("\n");
             }
+            String[] cmd = {"aide", "--check"};
+            logger.info(iVdsServer.runCmd(cmd).result);
             return log.toString();
         }else{
             logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
