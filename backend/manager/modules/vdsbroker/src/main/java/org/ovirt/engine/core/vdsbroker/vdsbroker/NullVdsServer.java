@@ -49,6 +49,10 @@ public class NullVdsServer implements IVdsServer {
     @Override public void close() {
     }
 
+    @Override public HostCliReturn runCmd(String[] cmd) {
+        return null;
+    }
+
     @Override public List<Certificate> getPeerCertificates() {
         return null;
     }
