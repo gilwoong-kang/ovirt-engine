@@ -106,8 +106,7 @@ public class EngineIntegrityController extends AuditLogableBase {
                 log.append(s);
                 log.append("\n");
             }
-            String[] cmd = {"aide", "--check"};
-            logger.info(iVdsServer.runCmd(cmd).result);
+            logger.info(iVdsServer.runIntegrity().result);
             return log.toString();
         }else{
             logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");

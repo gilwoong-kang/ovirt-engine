@@ -49,7 +49,7 @@ public class NullVdsServer implements IVdsServer {
     @Override public void close() {
     }
 
-    @Override public HostCliReturn runCmd(String[] cmd) {
+    @Override public HostCliReturn runIntegrity() {
         return null;
     }
 

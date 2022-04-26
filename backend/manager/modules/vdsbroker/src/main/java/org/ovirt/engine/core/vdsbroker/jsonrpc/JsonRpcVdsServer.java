@@ -219,9 +219,9 @@ public class JsonRpcVdsServer implements IVdsServer {
     }
 
     @Override
-    public HostCliReturn runCmd(String[] cmd){
-        JsonRpcRequest request = new RequestBuilder("Host.runCmd").withOptionalParameter("cmd", cmd).build();
-        Map<String, Object> response = new FutureMap(this.client, request);
+    public HostCliReturn runIntegrity(){
+        JsonRpcRequest request = new RequestBuilder("Host.runInt").build();
+        Map<String, Object> response = new FutureMap(this.client, request).withResponseKey("result");
         return new HostCliReturn(response);
     }
 
