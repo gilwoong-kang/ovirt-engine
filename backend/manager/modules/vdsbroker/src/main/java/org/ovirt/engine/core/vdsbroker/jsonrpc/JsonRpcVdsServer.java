@@ -220,6 +220,7 @@ public class JsonRpcVdsServer implements IVdsServer {
 
     @Override
     public HostCliReturn runIntegrity(){
+        logger.info("vdsm Integrity check req");
         JsonRpcRequest request = new RequestBuilder("Host.runInt").build();
         Map<String, Object> response = new FutureMap(this.client, request).withResponseKey("result");
         return new HostCliReturn(response);
