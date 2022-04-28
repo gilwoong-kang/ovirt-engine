@@ -102,6 +102,9 @@ public class EngineIntegrityController extends AuditLogableBase {
         String[] report = aide.aideRunWithLog().split("\n");
 //        String vdsm = iVdsServer.runIntegrity().result;
 //        logger.info(vdsm);
+        for(String r : report){
+            logger.info(r);
+        }
         if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){
