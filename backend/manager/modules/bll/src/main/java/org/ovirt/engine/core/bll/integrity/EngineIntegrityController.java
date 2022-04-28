@@ -100,13 +100,14 @@ public class EngineIntegrityController extends AuditLogableBase {
     public String runAdminReq(){
         logger.info("run admin req...");
         String[] report = aide.aideRunWithLog().split("\n");
+        String vdsm = iVdsServer.runIntegrity().result;
+        logger.info(vdsm);
         if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){
                 log.append(s);
                 log.append("\n");
             }
-            logger.info(iVdsServer.runIntegrity().result);
             return log.toString();
         }else{
             logger.info("System Integrity check success. is stable. ["+System.currentTimeMillis()+"]");
@@ -123,7 +124,7 @@ public class EngineIntegrityController extends AuditLogableBase {
 
             // aide parse
             // aide integrity fail
-            if (value.trim().equals(aide.getAIDEfAIL())) {
+            if (value.trim().equals(aide.getAIDEFAIL())) {
                 return true;
                 // aide integrity pass
             }

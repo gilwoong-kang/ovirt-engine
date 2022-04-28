@@ -13,7 +13,7 @@ public class Aide {
     private AideCommand aideCommand;
     Logger logger = LoggerFactory.getLogger(Aide.class);
     private final String AIDE_PASS= "AIDE found NO differences between database and filesystem. Looks okay!!";
-    private final String AIDE_fAIL= "AIDE found differences between database and filesystem!!";
+    private final String AIDE_FAIL = "AIDE found differences between database and filesystem!!";
 
     public Aide(){
         aideCommand = new AideCommand();
@@ -59,8 +59,8 @@ public class Aide {
         return AIDE_PASS;
     }
 
-    public String getAIDEfAIL() {
-        return AIDE_fAIL;
+    public String getAIDEFAIL() {
+        return AIDE_FAIL;
     }
 }
 
