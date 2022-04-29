@@ -10,7 +10,7 @@ import org.ovirt.engine.core.bll.Backend;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogDirector;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogableBase;
-import org.ovirt.engine.core.vdsbroker.jsonrpc.JsonRpcVdsServer;
+import org.ovirt.engine.core.vdsbroker.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class EngineIntegrityController extends AuditLogableBase {
     @Inject
     private AuditLogDirector auditLogDirector;
     @Inject
-    private JsonRpcVdsServer jsonRpcVdsServer;
+    private ResourceManager resourceManager;
 
     private final int PERIOD_TIME = 1000*60*60;
     private Aide aide;
@@ -100,11 +100,7 @@ public class EngineIntegrityController extends AuditLogableBase {
     public String runAdminReq(){
         logger.info("run admin req...");
         String[] report = aide.aideRunWithLog().split("\n");
-        String vdsm = jsonRpcVdsServer.runIntegrity().result;
-        logger.info(vdsm);
-        for(String r : report){
-            logger.info(r);
-        }
+        resourceManager.checkIntegirtyVds();
         if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){

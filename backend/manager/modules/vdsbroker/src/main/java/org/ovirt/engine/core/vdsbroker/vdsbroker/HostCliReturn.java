@@ -8,6 +8,9 @@ public class HostCliReturn {
 
     public String result;
 
+    public HostCliReturn() {
+    }
+
     public HostCliReturn(Map<String, Object> innerMap){
         result = String.valueOf(innerMap.get(RESULT));
     }

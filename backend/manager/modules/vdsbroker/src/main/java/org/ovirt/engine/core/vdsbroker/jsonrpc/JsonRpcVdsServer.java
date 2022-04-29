@@ -219,11 +219,14 @@ public class JsonRpcVdsServer implements IVdsServer {
     }
 
     @Override
-    public HostCliReturn runIntegrity(){
+    public void runIntegrity(BrokerCommandCallback callback){
         logger.info("vdsm Integrity check req");
         JsonRpcRequest request = new RequestBuilder("Host.runInt").build();
-        Map<String, Object> response = new FutureMap(this.client, request).withResponseKey("result");
-        return new HostCliReturn(response);
+        try{
+            client.call(request, callback);
+        }catch (ClientConnectionException e){
+            throw new TransportRunTimeException("Connection issues during send request", e);
+        }
     }
 
     @Override

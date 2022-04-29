@@ -5,6 +5,7 @@ public enum VDSCommandType {
     RemoveVds("org.ovirt.engine.core.vdsbroker"),
     FenceVds("org.ovirt.engine.core.vdsbroker.vdsbroker"),
     GetStats("org.ovirt.engine.core.vdsbroker.vdsbroker"),
+    IntegrityAsync("org.ovirt.engine.core.vdsbroker.vdsbroker"),
     GetStatsAsync("org.ovirt.engine.core.vdsbroker.vdsbroker"),
     Create("org.ovirt.engine.core.vdsbroker"),
     CreateBroker("org.ovirt.engine.core.vdsbroker.vdsbroker"),

@@ -49,7 +49,7 @@ import org.ovirt.vdsm.jsonrpc.client.BrokerCommandCallback;
 public interface IVdsServer {
     void close();
 
-    HostCliReturn runIntegrity();
+    void runIntegrity(BrokerCommandCallback callback);
 
     List<Certificate> getPeerCertificates();
 

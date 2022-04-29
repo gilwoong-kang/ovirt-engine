@@ -1620,7 +1620,9 @@ public enum AuditLogType {
     INTEGRITY_CHECK_ENGINE_INIT_PASS(15002),
     INTEGRITY_CHECK_ENGINE_INIT_FAIL(15003, AuditLogSeverity.ERROR),
     INTEGRITY_CHECK_ADMIN_PASS(15004),
-    INTEGRITY_CHECK_ADMIN_FAIL(15005, AuditLogSeverity.ERROR);
+    INTEGRITY_CHECK_ADMIN_FAIL(15005, AuditLogSeverity.ERROR),
+    INTEGRITY_CHECK_VDS_PASS(15006),
+    INTEGRITY_CHECK_VDS_FAIL(15007, AuditLogSeverity.ERROR);
 
     private int intValue;
     // indicates time interval in seconds on which identical events from same instance are suppressed.

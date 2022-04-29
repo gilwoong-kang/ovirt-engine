@@ -322,6 +322,11 @@ public class VdsManager {
         }
     }
 
+    public void integrityHostCheck(){
+        hostMonitoring = createHostMonitoring();
+        hostMonitoring.checkVdsIntegrity();
+    }
+
     private HostMonitoringInterface createHostMonitoring() {
         switch (cachedVds.getVdsType()) {
         case KubevirtNode:

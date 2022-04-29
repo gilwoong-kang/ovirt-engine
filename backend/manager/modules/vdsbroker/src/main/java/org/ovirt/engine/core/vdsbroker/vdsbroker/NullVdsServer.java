@@ -49,8 +49,7 @@ public class NullVdsServer implements IVdsServer {
     @Override public void close() {
     }
 
-    @Override public HostCliReturn runIntegrity() {
-        return null;
+    @Override public void runIntegrity(BrokerCommandCallback callback) {
     }
 
     @Override public List<Certificate> getPeerCertificates() {

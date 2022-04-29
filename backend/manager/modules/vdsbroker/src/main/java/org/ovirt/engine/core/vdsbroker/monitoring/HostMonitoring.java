@@ -504,6 +504,16 @@ public class HostMonitoring implements HostMonitoringInterface {
                 new VdsIdAndVdsVDSCommandParametersBase(vds).withCallback(new GetStatsAsyncCallback(isVdsUpOrGoingToMaintenance)));
     }
 
+    public void checkVdsIntegrity(){
+        if (Config.<Boolean>getValue(ConfigValues.DebugTimerLogging)) {
+            log.debug("vdsManager::refreshVdsStats entered, host='{}'({})",
+                    vds.getName(), vds.getId());
+        }
+        fetchHostInterfaces();
+        resourceManager.runAsyncVdsCommand(VDSCommandType.IntegrityAsync,
+                new VdsIdAndVdsVDSCommandParametersBase(vds));
+    }
+
     class GetStatsAsyncCallback implements BrokerCommandCallback {
 
         private boolean vdsUpOrGoingToMaintenance;
