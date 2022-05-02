@@ -1,9 +1,9 @@
 package org.ovirt.engine.core.vdsbroker.vdsbroker;
 
-import org.ovirt.engine.core.common.vdscommands.BrokerCommandCallback;
 import org.ovirt.engine.core.common.vdscommands.VdsIdAndVdsVDSCommandParametersBase;
 import org.ovirt.engine.core.utils.log.Logged;
 import org.ovirt.engine.core.utils.log.Logged.LogLevel;
+import org.ovirt.vdsm.jsonrpc.client.BrokerCommandCallback;
 
 import java.util.Map;
 
@@ -23,14 +23,13 @@ public class IntegrityAsyncVDSCommand<P extends VdsIdAndVdsVDSCommandParametersB
     }
 
     private class IntegrityVDSCommandCallback implements BrokerCommandCallback{
-
         @Override
-        public void onResponse(Map<String, Object> response) {
-            getVDSReturnValue().setReturnValue(response.get("result"));
+        public void onResponse(Map<String, Object> map) {
+            getVDSReturnValue().setReturnValue(map.get("result"));
         }
 
         @Override
-        public void onFailure(Throwable t) {
+        public void onFailure(Map<String, Object> map) {
 
         }
     }
