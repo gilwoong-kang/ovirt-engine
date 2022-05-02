@@ -128,10 +128,6 @@ public class ResourceManager implements BackendService {
         getEventListener().removeAsyncRunningCommand(vmId);
     }
 
-    public void checkIntegirtyVds(){
-        vdsManagersDict.values().forEach(VdsManager::integrityHostCheck);
-    }
-
     public void succededToRunVm(Guid vmId, Guid vdsId) {
         if (asyncRunningVms.contains(vmId)) {
             getEventListener().runningSucceded(vmId);

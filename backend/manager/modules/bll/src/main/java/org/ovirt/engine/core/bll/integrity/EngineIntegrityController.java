@@ -20,8 +20,6 @@ public class EngineIntegrityController extends AuditLogableBase {
 
     @Inject
     private AuditLogDirector auditLogDirector;
-    @Inject
-    private ResourceManager resourceManager;
 
     private final int PERIOD_TIME = 1000*60*60;
     private Aide aide;
@@ -101,7 +99,6 @@ public class EngineIntegrityController extends AuditLogableBase {
     public String runAdminReq(){
         logger.info("run admin req...");
         String[] report = aide.aideRunWithLog().split("\n");
-        resourceManager.checkIntegirtyVds();
         if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){
