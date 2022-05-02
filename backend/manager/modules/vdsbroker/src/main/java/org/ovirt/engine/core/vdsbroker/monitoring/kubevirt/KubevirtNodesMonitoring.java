@@ -99,8 +99,4 @@ public class KubevirtNodesMonitoring implements HostMonitoringInterface {
             // ignore
         }
     }
-
-    @Override
-    public void checkVdsIntegrity() {
-    }
 }
