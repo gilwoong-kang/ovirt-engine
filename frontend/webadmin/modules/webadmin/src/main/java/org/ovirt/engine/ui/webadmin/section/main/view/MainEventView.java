@@ -15,7 +15,6 @@ import org.ovirt.engine.core.common.businessentities.AuditLog;
 import org.ovirt.engine.core.common.businessentities.VDS;
 import org.ovirt.engine.core.common.mode.ApplicationMode;
 import org.ovirt.engine.core.common.queries.QueryParametersBase;
-import org.ovirt.engine.core.common.queries.QueryReturnValue;
 import org.ovirt.engine.core.common.queries.QueryType;
 import org.ovirt.engine.core.searchbackend.AuditLogConditionFieldAutoCompleter;
 import org.ovirt.engine.ui.common.uicommon.model.MainModelProvider;
@@ -30,6 +29,8 @@ import org.ovirt.engine.ui.uicommonweb.models.events.EventListModel;
 import org.ovirt.engine.ui.webadmin.ApplicationConstants;
 import org.ovirt.engine.ui.webadmin.gin.AssetProvider;
 import org.ovirt.engine.ui.webadmin.section.main.presenter.MainEventPresenter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     private static final String BASIC_VIEW_MSG_COLUMN_WIDTH = "100%"; //$NON-NLS-1$
     private static final String ADV_VIEW_MSG_COLUMN_WIDTH = "175px"; //$NON-NLS-1$
     private AbstractTextColumn<AuditLog> basicMessageColumn;
+    Logger logger = LoggerFactory.getLogger(MainEventView.class);
 
     @Inject
     public MainEventView(MainModelProvider<AuditLog, EventListModel<Void>> modelProvider) {
@@ -80,7 +82,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     @UiHandler("integrityCheckButton")
     void onIntegrityCheckButton(ClickEvent event){
 //        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
-        ArrayList<ActionParametersBase> paramlist = new ArrayList<>();
+        ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
         Frontend.getInstance().runQuery(QueryType.GetAllHosts,
                 new QueryParametersBase(), new AsyncQuery(new AsyncCallback() {
                     @Override
@@ -91,11 +93,13 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
                         }
                         for (Object item : list) {
                             VDS vds = (VDS) item;
-                            paramlist.add(new VdsActionParameters(vds.getId()));
+                            parameterList.add(new VdsActionParameters(vds.getId()));
                         }
                     }
                 }));
-        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, paramlist);
+        logger.info("hostQuery Success.");
+        logger.info(parameterList.get(0).toString());
+        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, parameterList);
     }
 
     void handleViewChange(boolean advancedViewEnabled) {
