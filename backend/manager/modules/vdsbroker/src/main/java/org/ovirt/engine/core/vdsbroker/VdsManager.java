@@ -613,6 +613,7 @@ public class VdsManager {
 
     public Object checkHostIntegrity(VDS vds){
         // TO_DO
+        log.info("run vds integrity");
         VDSReturnValue result = resourceManager.runVdsCommand(VDSCommandType.IntegrityAsync,
                 new VdsIdAndVdsVDSCommandParametersBase(vds));
         return result.getReturnValue();

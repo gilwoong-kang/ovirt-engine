@@ -2097,4 +2097,8 @@ public class HostListModel<E> extends ListWithSimpleDetailsModel<E, VDS> impleme
                 || (vm.getCpuPinning() != null && !vm.getCpuPinning().isEmpty())
                 || vmsWithPinnedvNumaNodes.contains(vm.getId());
     }
+
+    public List<VDS> getHosts(){
+        return getItemsAsList();
+    }
 }
