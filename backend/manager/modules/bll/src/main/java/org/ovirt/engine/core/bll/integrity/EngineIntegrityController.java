@@ -7,6 +7,7 @@ import java.util.concurrent.Future;
 import javax.inject.Inject;
 
 import org.ovirt.engine.core.bll.Backend;
+import org.ovirt.engine.core.bll.NonTransactiveCommandAttribute;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogDirector;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogableBase;
@@ -14,7 +15,7 @@ import org.ovirt.engine.core.vdsbroker.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+@NonTransactiveCommandAttribute
 public class EngineIntegrityController extends AuditLogableBase {
 
     @Inject
