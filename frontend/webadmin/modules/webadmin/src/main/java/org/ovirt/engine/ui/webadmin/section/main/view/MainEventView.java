@@ -78,7 +78,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
 
     @UiHandler("integrityCheckButton")
     void onIntegrityCheckButton(ClickEvent event){
-        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
+//        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
         ArrayList<ActionParametersBase> list = new ArrayList<>();
         for (Object item : getHosts()) {
             VDS vds = (VDS) item;
