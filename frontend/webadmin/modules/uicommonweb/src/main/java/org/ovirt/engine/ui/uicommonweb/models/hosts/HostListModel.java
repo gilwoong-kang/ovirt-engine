@@ -2099,6 +2099,7 @@ public class HostListModel<E> extends ListWithSimpleDetailsModel<E, VDS> impleme
     }
 
     public List<VDS> getHosts(){
+        getLogger().info("get hosts");
         return getItemsAsList();
     }
 }

@@ -88,7 +88,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     }
 
     private List<VDS> getHosts(){
-        return hostListModel.getItemsAsList();
+        return hostListModel.getHosts();
     }
 
     void handleViewChange(boolean advancedViewEnabled) {
