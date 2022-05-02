@@ -611,6 +611,13 @@ public class VdsManager {
         handleRefreshCapabilitiesResponse(vds, caps);
     }
 
+    public Object checkHostIntegrity(VDS vds){
+        // TO_DO
+        VDSReturnValue result = resourceManager.runVdsCommand(VDSCommandType.IntegrityAsync,
+                new VdsIdAndVdsVDSCommandParametersBase(vds));
+        return result.getReturnValue();
+    }
+
     private void logRefreshCapabilitiesFailure(Throwable t) {
         log.error("Unable to RefreshCapabilities: {}", ExceptionUtils.getRootCauseMessage(t));
         log.debug("Exception", t);
