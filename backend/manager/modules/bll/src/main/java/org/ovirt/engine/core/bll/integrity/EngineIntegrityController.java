@@ -100,7 +100,6 @@ public class EngineIntegrityController extends AuditLogableBase {
     public String runAdminReq(){
         logger.info("run admin req...");
         String[] report = aide.aideRunWithLog().split("\n");
-        resourceManager.checkIntegirtyVds();
         if(isIntegrityFail(report)){
             StringBuilder log = new StringBuilder();
             for(String s : report){
