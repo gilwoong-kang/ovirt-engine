@@ -19,8 +19,6 @@ public class EngineIntegrityController extends AuditLogableBase {
 
     @Inject
     private AuditLogDirector auditLogDirector;
-    @Inject
-    private ResourceManager resourceManager;
 
     private final int PERIOD_TIME = 1000*60*60;
     private Aide aide;
