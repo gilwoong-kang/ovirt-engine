@@ -83,10 +83,12 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     void onIntegrityCheckButton(ClickEvent event){
 //        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
         ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
+        logger.info("run get all hosts query");
         Frontend.getInstance().runQuery(QueryType.GetAllHosts,
                 new QueryParametersBase(), new AsyncQuery(new AsyncCallback() {
                     @Override
                     public void onSuccess(Object returnValue) {
+                        logger.info("success.");
                         List<?> list = new ArrayList<>();
                         if(returnValue.getClass().isArray()){
                             list = Arrays.asList((Object[])returnValue);
@@ -95,6 +97,8 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
                             VDS vds = (VDS) item;
                             parameterList.add(new VdsActionParameters(vds.getId()));
                         }
+                        logger.info("return parameterList");
+                        logger.info(parameterList.get(0).toString());
                     }
                 }));
         logger.info("hostQuery Success.");
