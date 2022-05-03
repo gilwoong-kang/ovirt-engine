@@ -56,7 +56,6 @@ import org.ovirt.engine.core.vdsbroker.vdsbroker.DeviceInfoReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.DevicesVisibilityMapReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.DomainXmlListReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.FenceStatusReturn;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.HostCliReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.HostDevListReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.HostJobsReturn;
 import org.ovirt.engine.core.vdsbroker.vdsbroker.IQNListReturn;

@@ -1,23 +1,27 @@
 package org.ovirt.engine.ui.webadmin.section.main.view;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import org.ovirt.engine.core.common.action.ActionParametersBase;
 import org.ovirt.engine.core.common.action.ActionType;
 import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
+import org.ovirt.engine.core.common.action.CheckVdsIntegrityParameter;
 import org.ovirt.engine.core.common.businessentities.AuditLog;
+import org.ovirt.engine.core.common.businessentities.VDS;
 import org.ovirt.engine.core.common.mode.ApplicationMode;
+import org.ovirt.engine.core.common.queries.QueryParametersBase;
+import org.ovirt.engine.core.common.queries.QueryReturnValue;
+import org.ovirt.engine.core.common.queries.QueryType;
+import org.ovirt.engine.core.compat.Guid;
 import org.ovirt.engine.core.searchbackend.AuditLogConditionFieldAutoCompleter;
 import org.ovirt.engine.ui.common.uicommon.model.MainModelProvider;
 import org.ovirt.engine.ui.common.widget.table.column.AbstractFullDateTimeColumn;
 import org.ovirt.engine.ui.common.widget.table.column.AbstractTextColumn;
 import org.ovirt.engine.ui.common.widget.table.column.AuditLogSeverityColumn;
+import org.ovirt.engine.ui.frontend.AsyncQuery;
 import org.ovirt.engine.ui.frontend.Frontend;
 import org.ovirt.engine.ui.uicommonweb.models.ApplicationModeHelper;
 import org.ovirt.engine.ui.uicommonweb.models.events.EventListModel;
@@ -27,14 +31,17 @@ import org.ovirt.engine.ui.webadmin.section.main.presenter.MainEventPresenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, EventListModel<Void>>
-    implements MainEventPresenter.ViewDef {
+        implements MainEventPresenter.ViewDef {
 
     interface ViewUiBinder extends UiBinder<Widget, MainEventView> {
         ViewUiBinder uiBinder = GWT.create(ViewUiBinder.class);
@@ -75,30 +82,20 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     }
 
     @UiHandler("integrityCheckButton")
-    void onIntegrityCheckButton(ClickEvent event){
-        ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
-        logger.info("run get all hosts query");
+    void onIntegrityCheckButton(ClickEvent event) {
         Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
+//        ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
 //        Frontend.getInstance().runQuery(QueryType.GetAllHosts,
-//                new QueryParametersBase(), new AsyncQuery(new AsyncCallback() {
-//                    @Override
-//                    public void onSuccess(Object returnValue) {
-//                        logger.info("success.");
-//                        List<?> list = new ArrayList<>();
-//                        if(returnValue.getClass().isArray()){
-//                            list = Arrays.asList((Object[])returnValue);
-//                        }
-//                        for (Object item : list) {
-//                            VDS vds = (VDS) item;
-//                            parameterList.add(new VdsActionParameters(vds.getId()));
-//                        }
-//                        logger.info("return parameterList");
-//                        logger.info(parameterList.get(0).toString());
+//                new QueryParametersBase(), new AsyncQuery<QueryReturnValue>(returnValue -> {
+//                    List<VDS> list = returnValue.getReturnValue();
+//                    for(VDS vds : list){
+//                        parameterList.add(new CheckVdsIntegrityParameter(vds.getId()));
 //                    }
 //                }));
-        logger.info("hostQuery Success.");
-//        logger.info(parameterList.get(0).toString());
+//        logger.info(parameterList.toString());
 //        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, parameterList);
+        Frontend.getInstance().runAction(ActionType.CheckVdsIntegrity,
+                new CheckVdsIntegrityParameter(new Guid(UUID.fromString("0f839703-8cd2-4082-affa-0f9e4df973d4"))));
     }
 
     void handleViewChange(boolean advancedViewEnabled) {

@@ -199,4 +199,8 @@ public abstract class VdsBrokerCommand<P extends VdsIdVDSCommandParametersBase> 
     }
 
     protected abstract void executeVdsBrokerCommand();
+
+    protected AuditLogDirector getAuditLogable(){
+        return auditLogDirector;
+    }
 }
