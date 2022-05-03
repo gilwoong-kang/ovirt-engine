@@ -10,19 +10,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import org.ovirt.engine.core.common.action.ActionParametersBase;
 import org.ovirt.engine.core.common.action.ActionType;
-import org.ovirt.engine.core.common.action.VdsActionParameters;
+import org.ovirt.engine.core.common.action.CheckIntegrityParameter;
 import org.ovirt.engine.core.common.businessentities.AuditLog;
-import org.ovirt.engine.core.common.businessentities.VDS;
 import org.ovirt.engine.core.common.mode.ApplicationMode;
-import org.ovirt.engine.core.common.queries.QueryParametersBase;
-import org.ovirt.engine.core.common.queries.QueryType;
 import org.ovirt.engine.core.searchbackend.AuditLogConditionFieldAutoCompleter;
 import org.ovirt.engine.ui.common.uicommon.model.MainModelProvider;
 import org.ovirt.engine.ui.common.widget.table.column.AbstractFullDateTimeColumn;
 import org.ovirt.engine.ui.common.widget.table.column.AbstractTextColumn;
 import org.ovirt.engine.ui.common.widget.table.column.AuditLogSeverityColumn;
-import org.ovirt.engine.ui.frontend.AsyncCallback;
-import org.ovirt.engine.ui.frontend.AsyncQuery;
 import org.ovirt.engine.ui.frontend.Frontend;
 import org.ovirt.engine.ui.uicommonweb.models.ApplicationModeHelper;
 import org.ovirt.engine.ui.uicommonweb.models.events.EventListModel;
@@ -81,29 +76,29 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
 
     @UiHandler("integrityCheckButton")
     void onIntegrityCheckButton(ClickEvent event){
-//        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
         ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
         logger.info("run get all hosts query");
-        Frontend.getInstance().runQuery(QueryType.GetAllHosts,
-                new QueryParametersBase(), new AsyncQuery(new AsyncCallback() {
-                    @Override
-                    public void onSuccess(Object returnValue) {
-                        logger.info("success.");
-                        List<?> list = new ArrayList<>();
-                        if(returnValue.getClass().isArray()){
-                            list = Arrays.asList((Object[])returnValue);
-                        }
-                        for (Object item : list) {
-                            VDS vds = (VDS) item;
-                            parameterList.add(new VdsActionParameters(vds.getId()));
-                        }
-                        logger.info("return parameterList");
-                        logger.info(parameterList.get(0).toString());
-                    }
-                }));
+        Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
+//        Frontend.getInstance().runQuery(QueryType.GetAllHosts,
+//                new QueryParametersBase(), new AsyncQuery(new AsyncCallback() {
+//                    @Override
+//                    public void onSuccess(Object returnValue) {
+//                        logger.info("success.");
+//                        List<?> list = new ArrayList<>();
+//                        if(returnValue.getClass().isArray()){
+//                            list = Arrays.asList((Object[])returnValue);
+//                        }
+//                        for (Object item : list) {
+//                            VDS vds = (VDS) item;
+//                            parameterList.add(new VdsActionParameters(vds.getId()));
+//                        }
+//                        logger.info("return parameterList");
+//                        logger.info(parameterList.get(0).toString());
+//                    }
+//                }));
         logger.info("hostQuery Success.");
-        logger.info(parameterList.get(0).toString());
-        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, parameterList);
+//        logger.info(parameterList.get(0).toString());
+//        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, parameterList);
     }
 
     void handleViewChange(boolean advancedViewEnabled) {
