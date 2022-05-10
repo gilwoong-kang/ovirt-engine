@@ -9,16 +9,11 @@ import org.ovirt.engine.core.bll.context.CommandContext;
 import org.ovirt.engine.core.bll.utils.PermissionSubject;
 import org.ovirt.engine.core.common.VdcObjectType;
 import org.ovirt.engine.core.common.action.CheckVdsIntegrityParameter;
-import org.ovirt.engine.core.common.vdscommands.VDSReturnValue;
 import org.ovirt.engine.core.compat.Guid;
 import org.ovirt.engine.core.vdsbroker.ResourceManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @NonTransactiveCommandAttribute
 public class CheckVdsIntegrityCommand<T extends CheckVdsIntegrityParameter> extends CommandBase<T>{
-
-    Logger logger = LoggerFactory.getLogger(CheckVdsIntegrityParameter.class);
     CheckVdsIntegrityParameter checkVdsIntegrityParameter;
 
     @Inject
@@ -31,11 +26,10 @@ public class CheckVdsIntegrityCommand<T extends CheckVdsIntegrityParameter> exte
 
     @Override
     protected void executeCommand() {
-        logger.info(super.getParameters().toString());
-        logger.info("exec checkvdsIntegrityCommand");
         setVdsId(checkVdsIntegrityParameter.getVdsId());
-        VDSReturnValue res = resourceManager.getVdsManager(checkVdsIntegrityParameter.getVdsId())
+        resourceManager.getVdsManager(checkVdsIntegrityParameter.getVdsId())
                 .checkHostIntegrity(getVds());
+        // todo resourceManager 직접 runAsyncVDSCommand해도 되지 않나?
         setSucceeded(true);
     }
 

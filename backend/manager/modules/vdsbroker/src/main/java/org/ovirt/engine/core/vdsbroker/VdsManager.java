@@ -21,7 +21,6 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.jboss.com.sun.corba.se.pept.broker.Broker;
 import org.ovirt.engine.core.common.AuditLogType;
 import org.ovirt.engine.core.common.businessentities.NonOperationalReason;
 import org.ovirt.engine.core.common.businessentities.SELinuxMode;
@@ -80,7 +79,11 @@ import org.ovirt.engine.core.vdsbroker.monitoring.MonitoringStrategyFactory;
 import org.ovirt.engine.core.vdsbroker.monitoring.RefresherFactory;
 import org.ovirt.engine.core.vdsbroker.monitoring.VmStatsRefresher;
 import org.ovirt.engine.core.vdsbroker.monitoring.kubevirt.KubevirtNodesMonitoring;
-import org.ovirt.engine.core.vdsbroker.vdsbroker.*;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.HostNetworkTopologyPersister;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.IVdsServer;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.NullVdsServer;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.VDSNetworkException;
+import org.ovirt.engine.core.vdsbroker.vdsbroker.VDSRecoveringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -607,56 +610,12 @@ public class VdsManager {
                 new VdsIdAndVdsVDSCommandParametersBase(vds));
         handleRefreshCapabilitiesResponse(vds, caps);
     }
-
+    // todo Command에서 ResourceManager.runVdsCommand 직접호출하도록 변경
     public VDSReturnValue checkHostIntegrity(VDS vds){
         // TO_DO
         log.info("run vds integrity");
         return resourceManager.runVdsCommand(VDSCommandType.IntegrityAsync,
-                new VdsIdAndVdsVDSCommandParametersBase(vds).withCallback(new CheckHostIntegrityCallback(vds)));
-    }
-
-    class CheckHostIntegrityCallback implements BrokerCommandCallback{
-        private VDS vds;
-
-        CheckHostIntegrityCallback(VDS vds){
-            this.vds = vds;
-        }
-
-        @Override
-        public void onResponse(Map<String, Object> response){
-            log.info("vds on response");
-            log.info(vds.getHostName());
-            log.info(vds.getId().toString());
-            for (String key : response.keySet()){
-                log.info(key);
-            }
-            for(Object value : response.values()){
-                log.info(value.toString());
-            }
-
-            VDSIntegrityReturn vdsIntegrityReturn = (VDSIntegrityReturn)response.get("info");
-            log.info(vdsIntegrityReturn.result);
-
-            AuditLogable logable = createAuditLogableForHost(vds);
-            logable.addCustomValue("host", vds.getHostName());
-            logable.addCustomValue("result", vdsIntegrityReturn.status);
-            logable.addCustomValue("status", "1");
-            auditLogDirector.log(logable, AuditLogType.INTEGRITY_CHECK_VDS_PASS);
-
-//            VDSReturnValue vdsReturnValue = (VDSReturnValue)response.get("result");
-//            log.info(vdsReturnValue.toString());
-////            log.info(vdsReturnValue.getReturnValue().toString());
-//            log.info(vdsReturnValue.getExceptionString());
-//            log.info(vdsReturnValue.getVdsError().getMessage());
-
-        }
-
-        @Override
-        public void onFailure(Throwable t){
-            AuditLogable logable = createAuditLogableForHost(vds);
-            logable.addCustomValue("host", vds.getHostName());
-            auditLogDirector.log(logable, AuditLogType.INTEGRITY_CHECK_VDS_FAIL);
-        }
+                new VdsIdAndVdsVDSCommandParametersBase(vds));
     }
 
     private void logRefreshCapabilitiesFailure(Throwable t) {

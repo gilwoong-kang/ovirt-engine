@@ -25,6 +25,7 @@ public class CheckIntegrityCommand<P extends CheckIntegrityParameter> extends Ab
         if(result.isBlank()){
             setSucceeded(true);
         }else{
+            // todo report all of stdout ? or report file name & crud
             addCustomValue("errorFile", result);
             setSucceeded(false);
         }

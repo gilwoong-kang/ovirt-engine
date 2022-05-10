@@ -21,6 +21,7 @@ public class Aide {
 
     public boolean aideUpdate(){
         try{
+            // todo aide command update
             logger.info(Cmd.execute(aideCommand.getAideUpdateCommand()));
             return true;
         }catch(Exception e){
@@ -41,18 +42,16 @@ public class Aide {
             return null;
         }
     }
+
     public String aideRunWithLog(){
         try {
+            // todo aide command update
             String result = Cmd.execute(aideCommand.getAideRunCommandWithoutGrep());
-//            logger.error(result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
-    public void configReload() throws IOException {
-        aideCommand.reloadFcheckConfig();
     }
 
     public String getAIDEPASS() {

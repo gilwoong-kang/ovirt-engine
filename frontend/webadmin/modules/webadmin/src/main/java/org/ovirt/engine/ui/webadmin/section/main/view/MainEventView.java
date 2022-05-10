@@ -57,6 +57,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
 
     private static final String BASIC_VIEW_MSG_COLUMN_WIDTH = "100%"; //$NON-NLS-1$
     private static final String ADV_VIEW_MSG_COLUMN_WIDTH = "175px"; //$NON-NLS-1$
+
     private AbstractTextColumn<AuditLog> basicMessageColumn;
     Logger logger = LoggerFactory.getLogger(MainEventView.class);
 

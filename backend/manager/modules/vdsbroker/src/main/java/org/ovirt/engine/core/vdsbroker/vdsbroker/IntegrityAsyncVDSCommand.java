@@ -52,31 +52,25 @@ public class IntegrityAsyncVDSCommand<P extends VdsIdAndVdsVDSCommandParametersB
                 logger.info(key);
                 logger.info(String.valueOf(response.get(key)));
             }
-//            getParameters().getCallback().onResponse(Collections.singletonMap("info", vdsIntegrityReturn));
-            //            VDSIntegrityReturn integrityReturn = new VDSIntegrityReturn(map);
+
             AuditLogable logable = new AuditLogableImpl();
             logable.setVdsId(getParameters().getVdsId());
             logable.setVdsName(getParameters().getVds().getName());
             logable.addCustomValue("host", getParameters().getVds().getHostName());
             logable.addCustomValue("result", String.valueOf(response.get("info")));
             logable.addCustomValue("status", "0001");
-//            logable.addCustomValue("result", integrityReturn.result);
-//            logable.addCustomValue("status", integrityReturn.status.message);
 
             getAuditLogable().log(logable, AuditLogType.INTEGRITY_CHECK_VDS_PASS);
         }
 
         @Override
         public void onFailure(Map<String, Object> map) {
-//            VDSIntegrityReturn integrityReturn = new VDSIntegrityReturn(map);
             AuditLogable logable = new AuditLogableImpl();
             logable.setVdsId(getParameters().getVdsId());
             logable.setVdsName(getParameters().getVds().getName());
             logable.addCustomValue("host", getParameters().getVds().getHostName());
             logable.addCustomValue("result", String.valueOf(map.get("result")));
             logable.addCustomValue("status", new Status(map).message);
-//            logable.addCustomValue("result", integrityReturn.result);
-//            logable.addCustomValue("status", integrityReturn.status.message);
 
             getAuditLogable().log(logable, AuditLogType.INTEGRITY_CHECK_VDS_FAIL);
         }

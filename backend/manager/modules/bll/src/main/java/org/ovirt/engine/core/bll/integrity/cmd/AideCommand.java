@@ -18,6 +18,7 @@ public class AideCommand {
         }
     }
     public String[] getAideUpdateCommand(){
+        // todo aide update cli command dev.
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
         integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.update")
@@ -26,14 +27,13 @@ public class AideCommand {
     public String[] getAideRunCommand(){
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
-        integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.run")+
-        integrityProperties.getProperty("grep")+integrityProperties.getProperty("grep.total")};
+        integrityProperties.getProperty("aide.command")
+        };
     }
 
     public String[] getAideRunCommandWithoutGrep(){
         return new String[]{integrityProperties.getProperty("shell"),
         integrityProperties.getProperty("shell.option"),
-//        integrityProperties.getProperty("fcheck.path")+integrityProperties.getProperty("fcheck.run")
         integrityProperties.getProperty("aide.command")
         };
     }

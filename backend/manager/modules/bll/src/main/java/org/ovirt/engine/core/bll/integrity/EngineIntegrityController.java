@@ -26,18 +26,17 @@ public class EngineIntegrityController extends AuditLogableBase {
     Logger logger = LoggerFactory.getLogger(EngineIntegrityController.class);
 
     public EngineIntegrityController() {
-//        PropertyConfigurator.configure(prop);
         aide = new Aide();
-  //      sendMail = new SendMail();
-//        propertiesConfig = new PropertiesConfig();
     }
 
     public void dataUpdate(){
+        // todo aide update logic dev
         aide.aideUpdate();
         logger.info("aide update. ");
     }
 
-    public void run(Backend backend){
+    // todo maybe remove ?
+    public void run(){
         final ExecutorService executorService = Executors.newFixedThreadPool(2);
         EngineIntegrityController engineIntegrityController = this;
         Future<?> future = executorService.submit(new Runnable() {

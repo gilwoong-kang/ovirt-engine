@@ -27,14 +27,6 @@ public class AbstractIntegrityCommand<T extends CheckIntegrityParameter> extends
 
     }
 
-    //    protected Whitelist getWhitelist() {
-//        return getParameters().getWhitelist();
-//    }
-//
-//    protected List<Whitelist> getWhitelists() {
-//        // FIXME, getAll error
-//        return whitelistDao.getAll();
-//    }
     @Override
     public List<PermissionSubject> getPermissionCheckSubjects(){
         List<PermissionSubject> permissionList = new ArrayList<>();

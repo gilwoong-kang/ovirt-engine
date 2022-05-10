@@ -310,13 +310,9 @@ public class Backend implements BackendInternal, BackendCommandObjectsHandler {
         // integrity check
         log.info("Integrity start.");
         if(!engineIntegrityController.runOnce()){
-            log.error("Initialize integrity check Error. System shutdown");
-//            System.exit(0);
+            // todo vdsm integrity check add
+            log.error("Initialize integrity check Error.");
         }
-//        else{
-//            engineIntegrityController.run(this);
-//        }
-
     }
 
     /**
