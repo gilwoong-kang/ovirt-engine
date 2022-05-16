@@ -7,13 +7,13 @@ import org.ovirt.engine.core.common.utils.ToStringBuilder;
 
 public class VdsAndCmdVDSCommandParametersBase extends VdsIdAndVdsVDSCommandParametersBase {
     private VDS privateVds;
-    private List<String> cmd;
+    private String[] cmd;
     
-    public List<String> getCmd() {
+    public String[] getCmd() {
         return cmd;
     }
 
-    public void setCmd(List<String> cmd) {
+    public void setCmd(String[] cmd) {
         this.cmd = cmd;
     }
 
@@ -25,7 +25,7 @@ public class VdsAndCmdVDSCommandParametersBase extends VdsIdAndVdsVDSCommandPara
         privateVds = vds;
     }
 
-    public VdsAndCmdVDSCommandParametersBase(VDS vds, List<String> cmd) {
+    public VdsAndCmdVDSCommandParametersBase(VDS vds, String[] cmd) {
         super(vds);
         this.cmd = cmd;
     }

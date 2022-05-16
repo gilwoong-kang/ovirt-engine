@@ -49,7 +49,7 @@ public class NullVdsServer implements IVdsServer {
     @Override public void close() {
     }
 
-    @Override public void runIntegrity(List<String> cmd, BrokerCommandCallback callback) {
+    @Override public void runIntegrity(String[] cmd, BrokerCommandCallback callback) {
     }
 
     @Override public List<Certificate> getPeerCertificates() {

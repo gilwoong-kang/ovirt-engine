@@ -29,11 +29,10 @@ public class CheckVdsIntegrityCommand<T extends CheckVdsIntegrityParameter> exte
     @Override
     protected void executeCommand() {
         AideCommand aideCommand = new AideCommand();
-        List<String> cmd = Arrays.asList(aideCommand.getAideRunCommand());
 
         setVdsId(checkVdsIntegrityParameter.getVdsId());
         resourceManager.getVdsManager(checkVdsIntegrityParameter.getVdsId())
-                .checkHostIntegrity(getVds(), cmd);
+                .checkHostIntegrity(getVds(), aideCommand.getAideRunCommand());
         // todo resourceManager 직접 runAsyncVDSCommand해도 되지 않나?
         setSucceeded(true);
     }

@@ -608,7 +608,7 @@ public class VdsManager {
         handleRefreshCapabilitiesResponse(vds, caps);
     }
     // todo Command에서 ResourceManager.runVdsCommand 직접호출하도록 변경
-    public VDSReturnValue checkHostIntegrity(VDS vds, List<String> cmd){
+    public VDSReturnValue checkHostIntegrity(VDS vds, String[] cmd){
         // TO_DO
         log.info("run vds integrity");
         for(String s : cmd){

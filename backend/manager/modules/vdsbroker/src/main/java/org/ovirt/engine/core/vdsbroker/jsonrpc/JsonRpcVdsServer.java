@@ -218,13 +218,13 @@ public class JsonRpcVdsServer implements IVdsServer {
     }
 //FIXME: new cmd
     @Override
-    public void runIntegrity(List<String> cmd, BrokerCommandCallback callback){
+    public void runIntegrity(String[] cmd, BrokerCommandCallback callback){
         logger.info("vdsm Integrity check req... cmd :");
         for(String s : cmd){
             logger.info(s);
         }
         JsonRpcRequest request = new RequestBuilder("Host.runInt")
-                                .withParameter("cmd", cmd).build();
+                                .withOptionalParameterAsList("cmd", new ArrayList<>(Arrays.asList(cmd))).build();
         try{
             client.call(request, callback);
         }catch (ClientConnectionException e){
