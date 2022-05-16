@@ -611,6 +611,9 @@ public class VdsManager {
     public VDSReturnValue checkHostIntegrity(VDS vds, List<String> cmd){
         // TO_DO
         log.info("run vds integrity");
+        for(String s : cmd){
+            log.info(s);
+        }
         return resourceManager.runVdsCommand(VDSCommandType.IntegrityAsync,
                 new VdsAndCmdVDSCommandParametersBase(vds, cmd));
     }
