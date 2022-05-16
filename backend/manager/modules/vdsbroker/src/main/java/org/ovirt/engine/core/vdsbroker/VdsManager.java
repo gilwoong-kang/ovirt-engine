@@ -41,10 +41,7 @@ import org.ovirt.engine.core.common.config.Config;
 import org.ovirt.engine.core.common.config.ConfigValues;
 import org.ovirt.engine.core.common.locks.LockingGroup;
 import org.ovirt.engine.core.common.utils.Pair;
-import org.ovirt.engine.core.common.vdscommands.BrokerCommandCallback;
-import org.ovirt.engine.core.common.vdscommands.VDSCommandType;
-import org.ovirt.engine.core.common.vdscommands.VDSReturnValue;
-import org.ovirt.engine.core.common.vdscommands.VdsIdAndVdsVDSCommandParametersBase;
+import org.ovirt.engine.core.common.vdscommands.*;
 import org.ovirt.engine.core.compat.Guid;
 import org.ovirt.engine.core.compat.TransactionScopeOption;
 import org.ovirt.engine.core.compat.Version;
@@ -611,11 +608,11 @@ public class VdsManager {
         handleRefreshCapabilitiesResponse(vds, caps);
     }
     // todo Command에서 ResourceManager.runVdsCommand 직접호출하도록 변경
-    public VDSReturnValue checkHostIntegrity(VDS vds){
+    public VDSReturnValue checkHostIntegrity(VDS vds, List<String> cmd){
         // TO_DO
         log.info("run vds integrity");
         return resourceManager.runVdsCommand(VDSCommandType.IntegrityAsync,
-                new VdsIdAndVdsVDSCommandParametersBase(vds));
+                new VdsAndCmdVDSCommandParametersBase(vds, cmd));
     }
 
     private void logRefreshCapabilitiesFailure(Throwable t) {

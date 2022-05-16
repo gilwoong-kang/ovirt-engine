@@ -216,11 +216,12 @@ public class JsonRpcVdsServer implements IVdsServer {
         Map<String, Object> response = new FutureMap(this.client, request);
         return new StatusOnlyReturn(response);
     }
-
+//FIXME: new cmd
     @Override
-    public void runIntegrity(BrokerCommandCallback callback){
+    public void runIntegrity(List<String> cmd, BrokerCommandCallback callback){
         logger.info("vdsm Integrity check req");
-        JsonRpcRequest request = new RequestBuilder("Host.runInt").build();
+        JsonRpcRequest request = new RequestBuilder("Host.runInt")
+                                .withParameter("cmd", cmd).build();
         try{
             client.call(request, callback);
         }catch (ClientConnectionException e){

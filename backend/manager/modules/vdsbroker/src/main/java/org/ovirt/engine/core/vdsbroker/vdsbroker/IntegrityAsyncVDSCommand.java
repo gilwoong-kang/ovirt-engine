@@ -1,10 +1,9 @@
 package org.ovirt.engine.core.vdsbroker.vdsbroker;
 
-import java.util.Collections;
 import java.util.Map;
 
 import org.ovirt.engine.core.common.AuditLogType;
-import org.ovirt.engine.core.common.vdscommands.VdsIdAndVdsVDSCommandParametersBase;
+import org.ovirt.engine.core.common.vdscommands.VdsAndCmdVDSCommandParametersBase;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogable;
 import org.ovirt.engine.core.dal.dbbroker.auditloghandling.AuditLogableImpl;
 import org.ovirt.engine.core.utils.log.Logged;
@@ -14,9 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Logged(executionLevel = LogLevel.DEBUG)
-public class IntegrityAsyncVDSCommand<P extends VdsIdAndVdsVDSCommandParametersBase> extends IntegrityVdsBrokerCommand<P>{
+public class IntegrityAsyncVDSCommand<P extends VdsAndCmdVDSCommandParametersBase> extends IntegrityVdsBrokerCommand<P>{
+    private P parameters;
+
     public IntegrityAsyncVDSCommand(P parameters){
         super(parameters, parameters.getVds());
+        this.parameters = parameters;
     }
 
     protected VDSIntegrityReturn vdsIntegrityReturn;
@@ -35,7 +37,7 @@ public class IntegrityAsyncVDSCommand<P extends VdsIdAndVdsVDSCommandParametersB
     @Override
     protected void executeVdsBrokerCommand() {
         try{
-            getBroker().runIntegrity(new IntegrityVDSCommandCallback());
+            getBroker().runIntegrity(parameters.getCmd(), new IntegrityVDSCommandCallback());
         }catch (Throwable t){
             getParameters().getCallback().onFailure(t);
         }
@@ -57,7 +59,7 @@ public class IntegrityAsyncVDSCommand<P extends VdsIdAndVdsVDSCommandParametersB
             logable.setVdsId(getParameters().getVdsId());
             logable.setVdsName(getParameters().getVds().getName());
             logable.addCustomValue("host", getParameters().getVds().getHostName());
-            logable.addCustomValue("result", String.valueOf(response.get("info")));
+            logable.addCustomValue("result", String.valueOf(response.get("result")));
             logable.addCustomValue("status", "0001");
 
             getAuditLogable().log(logable, AuditLogType.INTEGRITY_CHECK_VDS_PASS);
