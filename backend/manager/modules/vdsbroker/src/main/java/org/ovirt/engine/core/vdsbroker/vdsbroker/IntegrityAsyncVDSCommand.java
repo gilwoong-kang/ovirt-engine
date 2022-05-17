@@ -59,7 +59,7 @@ public class IntegrityAsyncVDSCommand<P extends VdsAndCmdVDSCommandParametersBas
             logable.setVdsId(getParameters().getVdsId());
             logable.setVdsName(getParameters().getVds().getName());
             logable.addCustomValue("host", getParameters().getVds().getHostName());
-            logable.addCustomValue("result", String.valueOf(response.get("result")));
+            logable.addCustomValue("result", String.valueOf(response.get("info")));
             logable.addCustomValue("status", "0001");
 
             getAuditLogable().log(logable, AuditLogType.INTEGRITY_CHECK_VDS_PASS);
@@ -71,7 +71,7 @@ public class IntegrityAsyncVDSCommand<P extends VdsAndCmdVDSCommandParametersBas
             logable.setVdsId(getParameters().getVdsId());
             logable.setVdsName(getParameters().getVds().getName());
             logable.addCustomValue("host", getParameters().getVds().getHostName());
-            logable.addCustomValue("result", String.valueOf(map.get("result")));
+            logable.addCustomValue("result", String.valueOf(map.get("info")));
             logable.addCustomValue("status", new Status(map).message);
 
             getAuditLogable().log(logable, AuditLogType.INTEGRITY_CHECK_VDS_FAIL);
