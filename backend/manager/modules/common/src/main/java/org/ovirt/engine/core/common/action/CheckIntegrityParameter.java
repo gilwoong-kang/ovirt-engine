@@ -7,7 +7,7 @@ import org.ovirt.engine.core.compat.Guid;
 
 public class CheckIntegrityParameter extends ActionParametersBase{
 
-    private static final long serialVersionUID = -609386731324599884L;
+    private static final long serialVersionUID = 3207631947188047598L;
 
     @NotNull
     Guid id;
