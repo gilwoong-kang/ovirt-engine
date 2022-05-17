@@ -85,18 +85,7 @@ public class MainEventView extends AbstractMainWithDetailsTableView<AuditLog, Ev
     @UiHandler("integrityCheckButton")
     void onIntegrityCheckButton(ClickEvent event) {
         Frontend.getInstance().runAction(ActionType.CheckIntegrity, new CheckIntegrityParameter());
-//        ArrayList<ActionParametersBase> parameterList = new ArrayList<>();
-//        Frontend.getInstance().runQuery(QueryType.GetAllHosts,
-//                new QueryParametersBase(), new AsyncQuery<QueryReturnValue>(returnValue -> {
-//                    List<VDS> list = returnValue.getReturnValue();
-//                    for(VDS vds : list){
-//                        parameterList.add(new CheckVdsIntegrityParameter(vds.getId()));
-//                    }
-//                }));
-//        logger.info(parameterList.toString());
-//        Frontend.getInstance().runMultipleAction(ActionType.CheckVdsIntegrity, parameterList);
-        Frontend.getInstance().runAction(ActionType.CheckVdsIntegrity,
-                new CheckVdsIntegrityParameter(new Guid(UUID.fromString("0f839703-8cd2-4082-affa-0f9e4df973d4"))));
+        Frontend.getInstance().runAction(ActionType.CheckVdsIntegrity, new CheckVdsIntegrityParameter());
     }
 
     void handleViewChange(boolean advancedViewEnabled) {

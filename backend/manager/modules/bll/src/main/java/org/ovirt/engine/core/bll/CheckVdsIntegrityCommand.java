@@ -13,6 +13,7 @@ import org.ovirt.engine.core.common.VdcObjectType;
 import org.ovirt.engine.core.common.action.CheckVdsIntegrityParameter;
 import org.ovirt.engine.core.compat.Guid;
 import org.ovirt.engine.core.vdsbroker.ResourceManager;
+import org.ovirt.engine.core.vdsbroker.VdsManager;
 
 @NonTransactiveCommandAttribute
 public class CheckVdsIntegrityCommand<T extends CheckVdsIntegrityParameter> extends CommandBase<T>{
@@ -30,10 +31,13 @@ public class CheckVdsIntegrityCommand<T extends CheckVdsIntegrityParameter> exte
     protected void executeCommand() {
         AideCommand aideCommand = new AideCommand();
 
-        setVdsId(checkVdsIntegrityParameter.getVdsId());
-        resourceManager.getVdsManager(checkVdsIntegrityParameter.getVdsId())
-                .checkHostIntegrity(getVds(), aideCommand.getAideRunCommand());
-        // todo resourceManager 직접 runAsyncVDSCommand해도 되지 않나?
+        for(VdsManager vdsManager : resourceManager.getVdsManagersDict().values()){
+            vdsManager.checkHostIntegrity(vdsManager.getCopyVds(), aideCommand.getAideRunCommand());
+        }
+//        setVdsId(checkVdsIntegrityParameter.getVdsId());
+//        resourceManager.getVdsManager(checkVdsIntegrityParameter.getVdsId())
+//                .checkHostIntegrity(getVds(), aideCommand.getAideRunCommand());
+//        // todo resourceManager 직접 runAsyncVDSCommand해도 되지 않나?
         setSucceeded(true);
     }
 

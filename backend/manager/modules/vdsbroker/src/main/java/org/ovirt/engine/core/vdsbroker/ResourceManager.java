@@ -232,6 +232,10 @@ public class ResourceManager implements BackendService {
         return vdsManger;
     }
 
+    public Map<Guid, VdsManager> getVdsManagersDict(){
+        return vdsManagersDict;
+    }
+
     /**
      * Set vm status to Unknown and save to DB.
      */
